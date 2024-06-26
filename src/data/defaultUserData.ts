@@ -1,6 +1,6 @@
 import { User } from "../types/user";
 
-export const usersData: User[] = [
+export const defaultUsersData: User[] = [
   {
     id: 1,
     name: "Elon Musk",
