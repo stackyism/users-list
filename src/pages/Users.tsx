@@ -10,19 +10,16 @@ export const Users = () => {
     users: User[];
     selectedUser: User | null;
     isModalVisible: boolean;
-    isEditMode: boolean;
   }>({
     users: defaultUsersData,
     selectedUser: null,
     isModalVisible: false,
-    isEditMode: false,
   });
 
   const showModal = (user: User | null = null) => {
     setState((prevState) => ({
       ...prevState,
       selectedUser: user,
-      isEditMode: !!user,
       isModalVisible: true,
     }));
   };
@@ -35,19 +32,21 @@ export const Users = () => {
     }));
   };
 
-  const handleOk = (updatedUser: User) => {
-    if (state.isEditMode) {
+  const handleOk = (updatedUser: User, isUserEdited: boolean) => {
+    if (isUserEdited) {
       setState((prevState) => ({
         ...prevState,
         users: prevState.users.map((user) =>
           user.id === updatedUser.id ? { ...updatedUser } : user
         ),
+        selectedUser: null,
         isModalVisible: false,
       }));
     } else {
       setState((prevState) => ({
         ...prevState,
         users: [...prevState.users, updatedUser],
+        selectedUser: null,
         isModalVisible: false,
       }));
     }
@@ -64,14 +63,14 @@ export const Users = () => {
     <>
       <UserList users={state.users} onEditUser={showModal} />
       <Button onClick={() => showModal()}>Add User</Button>
-      <UserAddEditModal
-        key={state.selectedUser?.id || "New User"}
-        user={state.selectedUser}
-        onOk={handleOk}
-        onClose={handleCloseModal}
-        visible={state.isModalVisible}
-        onDelete={handleDelete}
-      />
+      {state.isModalVisible ? (
+        <UserAddEditModal
+          user={state.selectedUser}
+          onOk={handleOk}
+          onClose={handleCloseModal}
+          onDelete={handleDelete}
+        />
+      ) : null}
     </>
   );
 };

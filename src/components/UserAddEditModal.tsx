@@ -3,14 +3,12 @@ import { Button, Input, Modal } from "antd";
 import { User } from "../types/user";
 
 export const UserAddEditModal = ({
-  visible,
   user,
   onOk,
   onClose,
   onDelete,
 }: {
-  visible: boolean;
-  onOk: (user: User) => void;
+  onOk: (user: User, isUserEdited: boolean) => void;
   onClose: () => void;
   onDelete: (user: User) => void;
   user?: User | null;
@@ -24,8 +22,8 @@ export const UserAddEditModal = ({
   return (
     <Modal
       title={isEditMode ? "Edit User" : "Add User"}
-      open={visible}
-      onOk={() => onOk(state)}
+      open
+      onOk={() => onOk(state, isEditMode)}
       onCancel={onClose}
       footer={[
         isEditMode && (
@@ -33,7 +31,11 @@ export const UserAddEditModal = ({
             Delete
           </Button>
         ),
-        <Button key="submit" type="primary" onClick={() => onOk(state)}>
+        <Button
+          key="submit"
+          type="primary"
+          onClick={() => onOk(state, isEditMode)}
+        >
           {isEditMode ? "Save" : "Add"}
         </Button>,
       ]}
@@ -41,6 +43,11 @@ export const UserAddEditModal = ({
       <Input
         placeholder="User Name"
         value={state.name}
+        onKeyDown={(event) => {
+          if (event.key === "Enter") {
+            onOk(state, isEditMode);
+          }
+        }}
         onChange={(e) =>
           setState((prevState) => ({
             ...prevState,
