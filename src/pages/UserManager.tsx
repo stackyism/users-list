@@ -4,10 +4,11 @@ import { defaultUsersData } from "../data/defaultUserData";
 import { User } from "../types/user";
 import { UserAddEditModal } from "../components/UserAddEditModal";
 import { UserList } from "../components/UserList";
+import styled from "styled-components";
 
 const { Title } = Typography;
 
-export const Users = () => {
+export const UserManager = () => {
   const [state, setState] = useState<{
     users: User[];
     selectedUser: User | null;
@@ -63,8 +64,8 @@ export const Users = () => {
   };
   return (
     <>
-      <Space align="center">
-        <Title>User Manager</Title>
+      <Space align="center" size="large">
+        <StyledTitle>User Manager</StyledTitle>
         <Button type="primary" onClick={() => showModal()}>
           Add User
         </Button>
@@ -86,3 +87,10 @@ export const Users = () => {
     </>
   );
 };
+
+const StyledTitle = styled(Title)`
+  && {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+`;

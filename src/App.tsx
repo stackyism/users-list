@@ -1,11 +1,12 @@
 import "./App.css";
 import React from "react";
-import { Users } from "./pages/Users";
+import { UserManager } from "./pages/UserManager";
 
 const App = () => {
   return (
     <div className="App">
-      <Users />
+      {/* add routes here */}
+      <UserManager />
     </div>
   );
 };

@@ -36,7 +36,7 @@ export const UserAddEditModal = ({
             ...user,
           }
         : getDefaultUser(),
-    []
+    [user]
   );
 
   const handleFinish = (values: FieldType) => {

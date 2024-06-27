@@ -1,6 +1,6 @@
 import React from "react";
 import { User } from "../types/user";
-import { Button, Avatar, Card, Space, Tooltip, Popconfirm, List } from "antd";
+import { Button, Avatar, Card, Tooltip, Popconfirm, List } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 export const UserList = ({
