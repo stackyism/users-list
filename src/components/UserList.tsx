@@ -19,6 +19,7 @@ export const UserList = ({
       renderItem={(user, index) => (
         <List.Item>
           <Card
+            onClick={() => onEditUser(user)}
             hoverable
             actions={[
               <Tooltip title="Edit">

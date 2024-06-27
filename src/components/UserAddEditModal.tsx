@@ -3,6 +3,7 @@ import type { FormProps } from "antd";
 import { Button, Input, Modal, Form, DatePicker, Space } from "antd";
 import { User } from "../types/user";
 import dayjs from "dayjs";
+import { useKeyDown } from "../hooks/useKeyDown";
 
 type FieldType = Omit<User, "id" | "icon">;
 
@@ -48,8 +49,13 @@ export const UserAddEditModal = ({
   const handleFinishError: FormProps<FieldType>["onFinishFailed"] = (
     errorInfo
   ) => {
-    console.log(errorInfo);
+    console.error(errorInfo); // can send sentry error
   };
+
+  const [form] = Form.useForm<FieldType>();
+
+  useKeyDown(() => form.submit(), ["Enter"]);
+
   return (
     <Modal
       title={isEditMode ? "Edit User" : "Add User"}
@@ -58,6 +64,7 @@ export const UserAddEditModal = ({
       footer={null}
     >
       <Form
+        form={form}
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
