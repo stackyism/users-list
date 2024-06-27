@@ -24,6 +24,7 @@ export const UserList = ({
             actions={[
               <Tooltip title="Edit">
                 <Button
+                  type="text"
                   size="small"
                   onClick={() => onEditUser(user)}
                   icon={<EditOutlined />}
@@ -35,13 +36,22 @@ export const UserList = ({
                   description="Are you sure to delete this user?"
                   okText="Yes"
                   cancelText="No"
-                  onConfirm={() => onDeleteUser(user)}
+                  onConfirm={(event) => {
+                    event?.stopPropagation();
+                    onDeleteUser(user);
+                  }}
+                  onCancel={(event) => {
+                    event?.stopPropagation();
+                  }}
                 >
                   <Button
                     type="text"
                     size="small"
                     danger
                     icon={<DeleteOutlined />}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                    }}
                   />
                 </Popconfirm>
               </Tooltip>,
@@ -55,7 +65,7 @@ export const UserList = ({
               }
               title={
                 <span>
-                  {user.icon} {user.name}
+                  {user.name} {user.icon}
                 </span>
               }
               description={user.about}

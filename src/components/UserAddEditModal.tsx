@@ -5,7 +5,7 @@ import { User } from "../types/user";
 import dayjs from "dayjs";
 import { useKeyDown } from "../hooks/useKeyDown";
 
-type FieldType = Omit<User, "id" | "icon">;
+type FieldType = Omit<User, "id">;
 
 const getDefaultUser = (): User => ({
   id: Math.floor(Math.random() * 1000000),
@@ -15,17 +15,19 @@ const getDefaultUser = (): User => ({
   birthday: "",
 });
 
+export type UserAddEditModalProps = {
+  onOk: (user: User, isUserEdited: boolean) => void;
+  onClose: () => void;
+  onDelete: (user: User) => void;
+  user?: User | null;
+};
+
 export const UserAddEditModal = ({
   user,
   onOk,
   onClose,
   onDelete,
-}: {
-  onOk: (user: User, isUserEdited: boolean) => void;
-  onClose: () => void;
-  onDelete: (user: User) => void;
-  user?: User | null;
-}) => {
+}: UserAddEditModalProps) => {
   const isEditMode = Boolean(user);
   const userDetails = useMemo(
     () =>
@@ -98,6 +100,14 @@ export const UserAddEditModal = ({
           normalize={(value) => value && dayjs(value).format("MMMM DD, YYYY")}
         >
           <DatePicker />
+        </Form.Item>
+
+        <Form.Item<FieldType>
+          label="Emoticon"
+          name="icon"
+          rules={[{ required: true, message: "Please enter icon for user!" }]}
+        >
+          <Input />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 20, span: 16 }} layout="horizontal">
