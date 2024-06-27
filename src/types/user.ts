@@ -2,6 +2,6 @@ export type User = {
   id: number;
   name: string;
   icon: string;
-  birthday?: string;
-  about?: string;
+  birthday: string;
+  about: string;
 };
