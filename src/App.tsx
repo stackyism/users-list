@@ -4,7 +4,7 @@ import { Users } from "./pages/Users";
 
 const App = () => {
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="App">
       <Users />
     </div>
   );

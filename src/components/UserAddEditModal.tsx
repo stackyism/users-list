@@ -93,16 +93,14 @@ export const UserAddEditModal = ({
           <DatePicker />
         </Form.Item>
 
-        <Form.Item
-          wrapperCol={{ offset: isEditMode ? 16 : 20, span: 16 }}
-          layout="horizontal"
-        >
+        <Form.Item wrapperCol={{ offset: 20, span: 16 }} layout="horizontal">
           <Space>
+            {/*  Somehow doesn't make sense here
             {isEditMode ? (
               <Button danger onClick={() => onDelete(userDetails)}>
                 Delete
               </Button>
-            ) : null}
+            ) : null} */}
 
             <Button type="primary" htmlType="submit">
               Submit

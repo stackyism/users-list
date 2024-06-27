@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Button } from "antd";
+import { Button, Typography, Space } from "antd";
 import { defaultUsersData } from "../data/defaultUserData";
 import { User } from "../types/user";
 import { UserAddEditModal } from "../components/UserAddEditModal";
 import { UserList } from "../components/UserList";
+
+const { Title } = Typography;
 
 export const Users = () => {
   const [state, setState] = useState<{
@@ -61,8 +63,18 @@ export const Users = () => {
   };
   return (
     <>
-      <UserList users={state.users} onEditUser={showModal} />
-      <Button onClick={() => showModal()}>Add User</Button>
+      <Space align="center">
+        <Title>User Manager</Title>
+        <Button type="primary" onClick={() => showModal()}>
+          Add User
+        </Button>
+      </Space>
+      <UserList
+        users={state.users}
+        onEditUser={showModal}
+        onDeleteUser={handleDelete}
+      />
+
       {state.isModalVisible ? (
         <UserAddEditModal
           user={state.selectedUser}
