@@ -24,9 +24,13 @@ export const UserList = ({
             actions={[
               <Tooltip title="Edit">
                 <Button
+                  data-testid={`edit-user-${user.id}`}
                   type="text"
                   size="small"
-                  onClick={() => onEditUser(user)}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    onEditUser(user);
+                  }}
                   icon={<EditOutlined />}
                 />
               </Tooltip>,
@@ -47,6 +51,7 @@ export const UserList = ({
                   <Button
                     type="text"
                     size="small"
+                    data-testid={`delete-user-${user.id}`}
                     danger
                     icon={<DeleteOutlined />}
                     onClick={(event) => {
@@ -64,9 +69,9 @@ export const UserList = ({
                 />
               }
               title={
-                <span>
-                  {user.name} {user.icon}
-                </span>
+                <div>
+                  <span>{user.name}</span> <span>{user.icon}</span>
+                </div>
               }
               description={user.about}
             />

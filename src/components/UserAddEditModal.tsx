@@ -81,7 +81,7 @@ export const UserAddEditModal = ({
           name="name"
           rules={[{ required: true, message: "Please enter user name!" }]}
         >
-          <Input />
+          <Input data-testid="user-name-field" />
         </Form.Item>
 
         <Form.Item<FieldType>
@@ -89,7 +89,7 @@ export const UserAddEditModal = ({
           name="about"
           rules={[{ required: true, message: "Please enter info about user!" }]}
         >
-          <Input />
+          <Input data-testid="user-about-field" />
         </Form.Item>
 
         <Form.Item<FieldType>
@@ -99,7 +99,7 @@ export const UserAddEditModal = ({
           getValueProps={(value) => ({ value: value && dayjs(value) })}
           normalize={(value) => value && dayjs(value).format("MMMM DD, YYYY")}
         >
-          <DatePicker />
+          <DatePicker data-testid="user-birthday-field" />
         </Form.Item>
 
         <Form.Item<FieldType>
@@ -107,7 +107,7 @@ export const UserAddEditModal = ({
           name="icon"
           rules={[{ required: true, message: "Please enter icon for user!" }]}
         >
-          <Input />
+          <Input data-testid="user-icon-field" />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 20, span: 16 }} layout="horizontal">
@@ -119,7 +119,11 @@ export const UserAddEditModal = ({
               </Button>
             ) : null} */}
 
-            <Button type="primary" htmlType="submit">
+            <Button
+              data-testid="submit-user-edit-modal"
+              type="primary"
+              htmlType="submit"
+            >
               Submit
             </Button>
           </Space>
