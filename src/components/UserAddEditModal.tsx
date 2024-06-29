@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import type { FormProps } from "antd";
 import { Button, Input, Modal, Form, DatePicker, Space } from "antd";
 import { User } from "../types/user";
@@ -29,6 +29,7 @@ export const UserAddEditModal = ({
   onDelete,
 }: UserAddEditModalProps) => {
   const isEditMode = Boolean(user);
+
   const userDetails = useMemo(
     () =>
       user
@@ -39,15 +40,19 @@ export const UserAddEditModal = ({
     [user]
   );
 
-  const handleFinish = (values: FieldType) => {
-    onOk(
-      {
-        ...userDetails,
-        ...values,
-      },
-      isEditMode
-    );
-  };
+  const handleFinish = useCallback(
+    (values: FieldType) => {
+      onOk(
+        {
+          ...userDetails,
+          ...values,
+        },
+        isEditMode
+      );
+    },
+    [onOk, userDetails, isEditMode]
+  );
+
   const handleFinishError: FormProps<FieldType>["onFinishFailed"] = (
     errorInfo
   ) => {

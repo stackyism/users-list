@@ -10,7 +10,7 @@ const StyledCard = styled(Card)`
 
 export const AddUserCard = ({ onAddUser }: { onAddUser: () => void }) => (
   <StyledCard
-    onClick={onAddUser}
+    onClick={() => onAddUser()}
     hoverable
     actions={[
       <Tooltip title="Add User">
