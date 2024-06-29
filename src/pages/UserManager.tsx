@@ -72,7 +72,7 @@ export const UserManager = () => {
       </Space>
       <UserList
         users={state.users}
-        onEditUser={showModal}
+        onAddEditUser={showModal}
         onDeleteUser={handleDelete}
       />
 
