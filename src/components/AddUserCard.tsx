@@ -17,6 +17,7 @@ export const AddUserCard = ({ onAddUser }: { onAddUser: () => void }) => (
         <Button
           size="small"
           type="text"
+          aria-label="Add new user"
           onClick={(event) => {
             event.stopPropagation();
             onAddUser();
@@ -29,6 +30,7 @@ export const AddUserCard = ({ onAddUser }: { onAddUser: () => void }) => (
     <Card.Meta
       title="Add new user"
       description="Click here to add a new user"
+      aria-label="Add new user"
     />
   </StyledCard>
 );

@@ -86,7 +86,11 @@ export const UserAddEditModal = ({
           name="name"
           rules={[{ required: true, message: "Please enter user name!" }]}
         >
-          <Input data-testid="user-name-field" />
+          <Input
+            data-testid="user-name-field"
+            placeholder="Enter user name"
+            aria-label="User Name"
+          />
         </Form.Item>
 
         <Form.Item<FieldType>
@@ -94,7 +98,11 @@ export const UserAddEditModal = ({
           name="about"
           rules={[{ required: true, message: "Please enter info about user!" }]}
         >
-          <Input data-testid="user-about-field" />
+          <Input
+            data-testid="user-about-field"
+            placeholder="Enter information about user"
+            aria-label="About User"
+          />
         </Form.Item>
 
         <Form.Item<FieldType>
@@ -104,7 +112,10 @@ export const UserAddEditModal = ({
           getValueProps={(value) => ({ value: value && dayjs(value) })}
           normalize={(value) => value && dayjs(value).format("MMMM DD, YYYY")}
         >
-          <DatePicker data-testid="user-birthday-field" />
+          <DatePicker
+            data-testid="user-birthday-field"
+            aria-label="Birth date"
+          />
         </Form.Item>
 
         <Form.Item<FieldType>
@@ -112,7 +123,11 @@ export const UserAddEditModal = ({
           name="icon"
           rules={[{ required: true, message: "Please enter icon for user!" }]}
         >
-          <Input data-testid="user-icon-field" />
+          <Input
+            data-testid="user-icon-field"
+            placeholder="Enter emoticon which vibes with user"
+            aria-label="Emoticon"
+          />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 20, span: 16 }} layout="horizontal">
@@ -128,6 +143,7 @@ export const UserAddEditModal = ({
               data-testid="submit-user-edit-modal"
               type="primary"
               htmlType="submit"
+              aria-label="Submit user information"
             >
               Submit
             </Button>

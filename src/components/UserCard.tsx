@@ -31,6 +31,7 @@ export const UserCard = ({
           data-testid={`edit-user-${user.id}`}
           type="text"
           size="small"
+          aria-label="Edit User"
           onClick={(event) => {
             event.stopPropagation();
             onEditUser(user);
@@ -55,6 +56,7 @@ export const UserCard = ({
           <Button
             type="text"
             size="small"
+            aria-label="Delete User"
             data-testid={`delete-user-${user.id}`}
             danger
             icon={<DeleteOutlined />}
@@ -74,10 +76,17 @@ export const UserCard = ({
       }
       title={
         <div>
-          <Text ellipsis>{user.name}</Text> <Text>{user.icon}</Text>
+          <Text aria-label={user.name} ellipsis>
+            {user.name}
+          </Text>{" "}
+          <Text>{user.icon}</Text>
         </div>
       }
-      description={<Text ellipsis>{user.about}</Text>}
+      description={
+        <Text aria-label={user.about} ellipsis>
+          {user.about}
+        </Text>
+      }
     />
   </StyledCard>
 );
