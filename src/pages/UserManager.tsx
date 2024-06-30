@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Typography, Space } from "antd";
+import { Button, Typography, Space, notification } from "antd";
 import { defaultUsersData } from "../data/defaultUserData";
 import { User } from "../types/user";
 import { UserAddEditModal } from "../components/UserAddEditModal";
@@ -9,6 +9,7 @@ import styled from "styled-components";
 const { Title } = Typography;
 
 export const UserManager = () => {
+  const [api, contextHolder] = notification.useNotification();
   const [state, setState] = useState<{
     users: User[];
     selectedUser: User | null;
@@ -53,6 +54,12 @@ export const UserManager = () => {
         isModalVisible: false,
       }));
     }
+    api.success({
+      message: `User ${isUserEdited ? "updated" : "added"} successfully`,
+      description: `User ${updatedUser.name} has been ${
+        isUserEdited ? "updated" : "added"
+      } successfully`,
+    });
   };
 
   const handleDelete = (userToDelete: User) => {
@@ -61,9 +68,14 @@ export const UserManager = () => {
       users: prevState.users.filter((user) => user.id !== userToDelete.id),
       isModalVisible: false,
     }));
+    api.success({
+      message: `User deleted successfully`,
+      description: `User ${userToDelete.name} has been deleted successfully`,
+    });
   };
   return (
     <>
+      {contextHolder}
       <Space align="center" size="large">
         <StyledTitle>User Manager</StyledTitle>
         <Button type="primary" onClick={() => showModal()}>
